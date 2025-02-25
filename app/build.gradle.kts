@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // Firebase
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -36,6 +39,11 @@ android {
 }
 
 dependencies {
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+
+    // Firebase BoM Analytics
+    implementation("com.google.firebase:firebase-analytics")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
