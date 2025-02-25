@@ -45,6 +45,15 @@ dependencies {
     // Firebase BoM Analytics
     implementation("com.google.firebase:firebase-analytics")
 
+    // Firebase Autenticação
+    implementation("com.google.firebase:firebase-auth")
+
+    // Firebase Banco de dados
+    implementation("com.google.firebase:firebase-firestore")
+
+    // Firebase Armazenamento
+    implementation("com.google.firebase:firebase-storage")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
