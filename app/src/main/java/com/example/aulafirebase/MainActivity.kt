@@ -1,5 +1,6 @@
 package com.example.aulafirebase
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,27 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val autenticacao by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        verificarUsuarioLogado()
+    }
+    private fun verificarUsuarioLogado() {
+        val usuario = autenticacao.currentUser
+        val id = usuario?.uid
+
+        if (usuario != null ) {
+            exibirMensagem("Usuario está logado com id: $id")
+            startActivity(
+                Intent(this, PrincipalActivity::class.java)
+            )
+        } else {
+            exibirMensagem("Não tem usuario logado")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         // 6 caracteres e precisa ser forte
         val senha = "Tleo1607"
 
-        val autenticacao = FirebaseAuth.getInstance()
         autenticacao.createUserWithEmailAndPassword(
             email, senha
         ).addOnSuccessListener { authResult ->
