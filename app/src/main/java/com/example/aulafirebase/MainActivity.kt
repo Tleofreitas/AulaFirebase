@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aulafirebase.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +16,13 @@ class MainActivity : AppCompatActivity() {
     private val autenticacao by lazy {
         FirebaseAuth.getInstance()
     }
+    private val bancoDados by lazy {
+        FirebaseFirestore.getInstance()
+    }
 
     override fun onStart() {
         super.onStart()
-        verificarUsuarioLogado()
+        // verificarUsuarioLogado()
     }
     private fun verificarUsuarioLogado() {
 
@@ -50,9 +54,27 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         binding.btnExecutar.setOnClickListener {
-            cadastrarUsuario()
-            logarUsuario()
+            // cadastrarUsuario()
+            // logarUsuario()
+
+            salvarDados()
         }
+    }
+
+    private fun salvarDados() {
+
+        val dados = mapOf(
+            "nome" to "Thiago",
+            "idade" to "30"
+        )
+
+        bancoDados.collection("usuarios")
+            .document("1")
+            .set(dados)
+            .addOnSuccessListener { exibirMensagem("Usuario salvo com sucesso") }
+            .addOnFailureListener{ exception ->
+                exibirMensagem("Erro ao salvar usuário")
+            }
     }
 
     private fun logarUsuario() {
