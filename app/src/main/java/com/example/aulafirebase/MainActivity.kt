@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         verificarUsuarioLogado()
     }
     private fun verificarUsuarioLogado() {
+
+        // Deslogar usuário
+        // autenticacao.signOut()
+
         val usuario = autenticacao.currentUser
         val id = usuario?.uid
 
@@ -47,6 +51,24 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnExecutar.setOnClickListener {
             cadastrarUsuario()
+            logarUsuario()
+        }
+    }
+
+    private fun logarUsuario() {
+        val email = "thiagoleonardo1995@live.com"
+        // 6 caracteres e precisa ser forte
+        val senha = "Tleo1607"
+
+        autenticacao.signInWithEmailAndPassword(
+            email, senha
+        ).addOnSuccessListener { authResult ->
+            binding.textResultado.text = "Sucesso ao logar usuário"
+            startActivity(
+                Intent(this, PrincipalActivity::class.java)
+            )
+        }.addOnFailureListener { exception ->
+            binding.textResultado.text = "Falha ao logar usuário ${exception.message}"
         }
     }
 
