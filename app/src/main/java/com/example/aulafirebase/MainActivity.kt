@@ -69,24 +69,28 @@ class MainActivity : AppCompatActivity() {
         )
 
         val referenciaUsuario = bancoDados.collection("usuarios")
-            .document("2")
+            .document("1")
 
         // Substituir
         // referenciaUsuario.set(dados)
 
         // Atualizar
+        /*
         referenciaUsuario.update("nome", "Thiago Freitas")
             .addOnSuccessListener { exibirMensagem("Usuario Atualizado com sucesso") }
             .addOnFailureListener{ exception ->
                 exibirMensagem("Erro ao atualizar usuário")
             }
+         */
 
         // Deletar
+        /*
         referenciaUsuario.delete()
             .addOnSuccessListener { exibirMensagem("Usuario Deletado com sucesso") }
             .addOnFailureListener{ exception ->
                 exibirMensagem("Erro ao Deletar usuário")
             }
+         */
     }
 
     private fun salvarDados() {
