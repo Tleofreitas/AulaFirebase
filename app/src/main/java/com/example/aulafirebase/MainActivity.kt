@@ -56,9 +56,37 @@ class MainActivity : AppCompatActivity() {
         binding.btnExecutar.setOnClickListener {
             // cadastrarUsuario()
             // logarUsuario()
+            // salvarDados()
 
-            salvarDados()
+            atualizarRemoverDados()
         }
+    }
+
+    private fun atualizarRemoverDados() {
+        val dados = mapOf(
+            "nome" to "Thiago",
+            "idade" to "29"
+        )
+
+        val referenciaUsuario = bancoDados.collection("usuarios")
+            .document("2")
+
+        // Substituir
+        // referenciaUsuario.set(dados)
+
+        // Atualizar
+        referenciaUsuario.update("nome", "Thiago Freitas")
+            .addOnSuccessListener { exibirMensagem("Usuario Atualizado com sucesso") }
+            .addOnFailureListener{ exception ->
+                exibirMensagem("Erro ao atualizar usuário")
+            }
+
+        // Deletar
+        referenciaUsuario.delete()
+            .addOnSuccessListener { exibirMensagem("Usuario Deletado com sucesso") }
+            .addOnFailureListener{ exception ->
+                exibirMensagem("Erro ao Deletar usuário")
+            }
     }
 
     private fun salvarDados() {
